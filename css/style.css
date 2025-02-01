@@ -19,6 +19,7 @@
     border-radius: 4px 4px 0 0;
 }
 
+
 /* 卡片悬停动画 */
 .card {
     transition: transform 0.2s, box-shadow 0.2s;
@@ -37,10 +38,19 @@
     border-radius: 0;
 }
 
-/* 分类按钮间距调整 */
+/* 普通状态分类按钮 */
 .btn-outline-secondary {
+    /* 间距调整 */
     border-color: #dee2e6;
     white-space: nowrap;
+}
+
+/* 当前页面的分类按钮 */
+.btn-outline-secondary.active {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+    font-weight: 500;
 }
 
 /* 响应式调整 */
@@ -153,7 +163,7 @@
     background-color: #f8f9fa;
     padding: 1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);  /* 可选：添加阴影效果 */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);  /* 添加阴影效果 */
 }
 
 .about-this-item:hover {
