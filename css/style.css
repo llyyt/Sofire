@@ -13,12 +13,17 @@
 }
 
 /* 商品图片样式 */
-.product-img {
+/* .product-img {
     height: 200px;
     object-fit: cover;
     border-radius: 4px 4px 0 0;
+} ：这是原来使用Bootstrap栅格系统实现自适应屏幕调整列数的product-img版本*/
+.product-img {
+    width: 100%;
+    height: 200px; /* 固定图片高度 */
+    object-fit: cover; /* 确保图片裁剪适配容器 */
+    border-radius: 4px 4px 0 0; /* 保留圆角样式 */
 }
-
 
 /* 卡片悬停动画 */
 .card {
@@ -29,6 +34,79 @@
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
+
+/* 商品网格布局 */
+.product-grid {
+    display: grid;
+    gap: 1rem; /* 网格间距 */
+}
+
+/* 根据屏幕大小调整列数 */
+@media (min-width: 1200px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 列布局 */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 列布局 */
+    }
+}
+
+@media (max-width: 767px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 列布局 */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* 单列布局 */
+    }
+}
+
+.product-card-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column; /* 垂直布局 */
+    justify-content: space-between; /* 均匀分布内容 */
+}
+
+.product-card-title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-card-price {
+    font-size: 1.25rem;
+    color: #dc3545;
+    margin: 0;
+}
+
+/* .product-card-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background: none;
+    color: #007bff;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.product-card-btn:hover {
+    background: #007bff;
+    color: white;
+} */
+
+@media (max-width: 768px) {
+    .product-img {
+        height: 150px; /* 缩小图片高度 */
+    }
+}
+
+
 
 /* 面包屑导航调整 */
 .breadcrumb {
