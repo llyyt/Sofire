@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sofire - Food</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 公共顶部导航（同首页） -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <!-- 网站Logo -->
+            <a class="navbar-brand fw-bold text-danger" href="#">SOFIRE</a>
+            
+            <!-- 导航右侧链接 -->
+            <div class="d-flex align-items-center">
+                <div class="navbar-nav flex-row">
+                    <a class="nav-link px-3" href="#">Login</a>
+                    <a class="nav-link px-3" href="#">Register</a>
+                    <a class="nav-link px-3" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                        </svg>
+                        <span class="badge bg-danger">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 分类页面面包屑 -->
+    <nav aria-label="breadcrumb" class="bg-light py-3 border-bottom">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                <li class="breadcrumb-item active">Food</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- 分类导航（同首页） -->
+    <div class="category-nav py-3 bg-white">
+        <div class="container">
+            <div class="d-flex flex-nowrap overflow-auto">
+                <!-- 分类按钮 -->
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Food</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Cookware</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Seasonings</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Electronics</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Beauty</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Daily Goods</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Apparel</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Bedding</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Health Care</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Office</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Sports</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Outdoor</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2">Baby Care</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill">Toys</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 分类商品展示 -->
+    <main class="container my-5">
+        <h4 class="mb-4">Food Products</h4>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/1.jpg" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/2.jpg" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/3.webp" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/4.webp" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/5.webp" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/6.webp" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/7.webp" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <img src="../images/category/food/8.webp" class="card-img-top product-img" alt="Smartphone">
+                    <div class="card-body">
+                        <h6 class="card-title mb-2">Flagship Smartphone</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="text-danger mb-0">$799.00</h5>
+                            <button class="btn btn-sm btn-outline-primary">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

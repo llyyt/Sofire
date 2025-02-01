@@ -1,0 +1,129 @@
+/* 自定义样式 */
+.category-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 隐藏水平滚动条 */
+.category-nav::-webkit-scrollbar {
+    display: none;
+}
+
+/* 商品图片样式 */
+.product-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px 4px 0 0;
+}
+
+/* 卡片悬停动画 */
+.card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(0,0,0,0.125);
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* 面包屑导航调整 */
+.breadcrumb {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0;
+    background-color: #f8f9fa;
+    border-radius: 0;
+}
+
+/* 分类按钮间距调整 */
+.btn-outline-secondary {
+    border-color: #dee2e6;
+    white-space: nowrap;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) { /* 针对屏幕宽度小于或等于 576px 的样式 */
+    .navbar-nav .nav-link {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+    
+    .product-img {
+        height: 150px;
+    }
+}
+
+/* 购物车下拉菜单样式 */
+.cart-wrapper {
+    position: relative;
+}
+
+.cart-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 320px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 1100;
+}
+
+.cart-wrapper:hover .cart-dropdown {
+    display: block;
+}
+
+.cart-items {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.cart-item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cart-footer {
+    background: #f8f9fa;
+}
+
+/* 数量输入框样式 */
+.quantity-controls input::-webkit-outer-spin-button,
+.quantity-controls input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity-controls input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* 购物车下拉动画 */
+.cart-dropdown {
+    transform-origin: top;
+    animation: dropDown 0.2s ease-out;
+}
+
+@keyframes dropDown {
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 576px) {
+    .cart-dropdown {
+        width: 280px;
+        right: -100%;
+    }
+}
