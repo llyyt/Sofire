@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sofire - Product Detail</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-danger" href="index.html">SOFIRE</a>
+            <div class="d-flex align-items-center">
+                <div class="navbar-nav flex-row">
+                    <a class="nav-link px-3" href="#">Login</a>
+                    <a class="nav-link px-3" href="#">Register</a>
+
+                    <!-- 购物车 -->
+                    <div class="cart-wrapper position-relative">
+                        <a class="nav-link px-3" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                            <span class="badge bg-danger">2</span>
+                        </a>
+                        <!-- 购物车下拉内容 -->
+                        <div class="cart-dropdown">
+                            <div class="cart-header border-bottom p-3">
+                                <h6 class="mb-0">Shop Cart (2 Items)</h6>
+                            </div>
+                            <div class="cart-items">
+                                <!-- 购物车商品 -->
+                                <div class="cart-item d-flex p-3 border-bottom">
+                                    <img src="../images/food/1.webp" class="cart-item-img" alt="Product">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-1">Oreo, Chocolate Sandwich Cookies, Baked, Family Size, 19.1 oz, Shelf Stable, Plastic Tray</h6>
+                                        <div class="quantity-controls d-flex align-items-center mb-2">
+                                            <button class="btn btn-sm btn-outline-secondary">-</button>
+                                            <input type="number" class="form-control form-control-sm mx-2" value="1" min="1" style="width: 50px">
+                                            <button class="btn btn-sm btn-outline-secondary">+</button>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-danger">$9.60</span>
+                                            <button class="btn btn-sm btn-link text-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div class="cart-item d-flex p-3 border-bottom">
+                                    <img src="https://via.placeholder.com/60x60" class="cart-item-img" alt="Product">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-1">Stainless Cookware Set</h6>
+                                        <div class="quantity-controls d-flex align-items-center mb-2">
+                                            <button class="btn btn-sm btn-outline-secondary">-</button>
+                                            <input type="number" class="form-control form-control-sm mx-2" value="1" min="1" style="width: 50px">
+                                            <button class="btn btn-sm btn-outline-secondary">+</button>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-danger">$89.99</span>
+                                            <button class="btn btn-sm btn-link text-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-footer p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Total:</span>
+                                    <span class="text-danger fw-bold">$102.98</span>
+                                </div>
+                                <button class="btn btn-danger w-100">Pay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="bg-light py-3 border-bottom">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="../category/food.html">Food</a></li>
+                <li class="breadcrumb-item active">Oreo</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Product Section -->
+    <main class="container my-5">
+        <div class="row g-4">
+            <!-- Product Images -->
+            <div class="col-lg-6">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="../images/food/1.webp" class="d-block w-100" alt="Food Product Image 1">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="col-lg-6">
+                <h3 class="mb-3">Oreo, Chocolate Sandwich Cookies, Baked, Family Size, 19.1 oz, Shelf Stable, Plastic Tray</h1>
+                <div class="d-flex align-items-center mb-4">
+                    <h3 class="text-danger me-3">$9.60</h3>
+                    <!--有特价时： <del class="text-muted">$98.00</del> -->
+                </div>
+
+                <!-- 商品具体详情 -->
+                <!-- <div class="mb-4">
+                    <h5 class="mb-3">Product details</h5>
+                    <ul class="list-disc">
+                        <li><strong>Type:</strong> Roasted Nuts</li>
+                        <li><strong>Origin:</strong> Pakistan</li>
+                        <li><strong>Net Weight:</strong> 218g</li>
+                        <li><strong>Shelf Life:</strong> 180 days</li>
+                    </ul>
+                </div> -->
+                <hr class="my-4">
+    
+                <div class="about-this-item rounded">
+                    <div class="d-flex justify-content-between align-items-center" 
+                         role="button"
+                         data-bs-toggle="collapse" 
+                         data-bs-target="#productSpecs"
+                         style="cursor: pointer;">
+                        <h5 class="mb-0">About this item</h5>
+                        <span class="collapse-icon">
+                            <i class="bi bi-plus-lg"></i>
+                        </span>
+                    </div>
+                    
+
+                    <div class="collapse show" id="productSpecs">
+                        <div class="pt-3">
+                            <p>
+                                <strong>Ingredients:</strong> 
+                                Unbleached Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate {Vitamin B1}, Riboflavin {Vitamin B2}, Folic Acid), Sugar, Palm And/Or Canola Oil, Cocoa (Processed With Alkali), High Fructose Corn Syrup, Leavening (Baking Soda And/Or Calcium Phosphate), Salt, Soy Lecithin, Chocolate, Artificial Flavor.
+                            </p>
+                
+                            <ul class="list-style-disc ps-4">
+                                <li class="mb-2"><strong>Highlights:</strong> Our mission at Mondelez International is to create more moments of joy and build the best snacking company in the world by growing our people, growing our business and growing our impact on the world around us.</li>
+                                <li class="mb-2">Take a delicious break with Oreo Chocolate Sandwich Cookies, the favorite of millions around the world since 1912.</li>
+                                <li class="mb-2">Supremely dunkable, Oreos sandwich a rich creme filling between the bold taste of two chocolate wafers--making them milk's favorite cookie.</li>
+                                <li class="mb-2">The resealable pack with easy-pull tab keeps cookies fresh and is perfect for snacking, sharing, or traveling.</li>
+                                <li class="mb-2">Oreos are a kosher food that contains zero trans fats.</li>
+                                <li class="mb-2">This includes one 19.1oz Family Size package of Oreo Chocolate Sandwich Cookies.</li>
+                                <li class="mb-2">Original Oreo Cookies, baked, crunchy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="my-4">
+
+                <!-- Variants -->
+                <div class="mb-4">
+                    <h5 class="mb-3">Flavor</h5>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-secondary active">Original</button>
+                        <button type="button" class="btn btn-outline-secondary">Ice-Cream</button>
+                        <button type="button" class="btn btn-outline-secondary">Strawberry</button>
+                        <button type="button" class="btn btn-outline-secondary">Matcha</button>
+                    </div>
+                </div>
+
+                <!-- Quantity -->
+                <div class="mb-4">
+                    <h5 class="mb-3">Quantity</h5>
+                    <div class="input-group w-50">
+                        <button class="btn btn-outline-secondary" type="button">-</button>
+                        <input type="text" class="form-control text-center" value="1">
+                        <button class="btn btn-outline-secondary" type="button">+</button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-grid gap-3 d-md-block">
+                    <button class="btn btn-danger btn-lg px-5">Buy Now</button>
+                    <button class="btn btn-outline-danger btn-lg px-5">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品详情图片 -->
+        <section class="mt-5">
+            <h3 class="mb-4">Product Details</h3>
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/2.webp" class="img-fluid thumbnail-sm" alt="Food detail 2">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/3.webp" class="img-fluid thumbnail-sm" alt="Food detail 3">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/4.webp" class="img-fluid thumbnail-sm" alt="Food detail 4">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/5.webp" class="img-fluid thumbnail-sm" alt="Food detail 5">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/6.webp" class="img-fluid thumbnail-sm" alt="Food detail 6">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/7.webp" class="img-fluid thumbnail-sm" alt="Food detail 7">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/8.webp" class="img-fluid thumbnail-sm" alt="Food detail 8">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/9.webp" class="img-fluid thumbnail-sm" alt="Food detail 9">
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <img src="../images/food/10.webp" class="img-fluid thumbnail-sm" alt="Food detail 10">
+                </div>
+            </div>
+        </section>
+
+        <!-- 评论 -->
+        <section class="mt-5">
+            <h3 class="mb-4">Customer Reviews (2)</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://www.gravatar.com/avatar/?d=mp&s=60" class="rounded-circle me-3" width="30" alt="Default Avatar">
+                        <div>
+                            <h6 class="mb-0">daniela172</h6>
+                            <small class="text-muted">Nov 4, 2024</small>
+                        </div>
+                    </div>
+                    <p class="mb-0">My son's 5th grade class recently had a holiday party at school. When I asked what I can send in, I was specifically asked to send 6 pack Oreo cookies. The school requires packaged store bought goods and apparently the kids love Oreos. I suppose I can't argue since I ate my share of Oreos when I was a kid. They aren't as inexpensive as they used to be but they're readily available at all local stores.</p>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://www.gravatar.com/avatar/?d=mp&s=60" class="rounded-circle me-3" width="30" alt="Default Avatar">
+                        <div>
+                            <h6 class="mb-0">sarah458_9956</h6>
+                            <small class="text-muted">Dec 15, 2024</small>
+                        </div>
+                    </div>
+                    <p class="mb-0">Oreos are a classic treat that perfectly blend two chocolate wafers with a creamy filling, creating a delightful balance of flavors. Their satisfying crunch and smooth texture make them irresistible, whether enjoyed straight from the package, dunked in milk, or used in desserts. With exciting limited-edition flavors and even gluten-free options, Oreos cater to all cookie lovers. Overall, they're a nostalgic snack that brings joy with every bite!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-light py-4 mt-5 border-top">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Sofire China. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>
