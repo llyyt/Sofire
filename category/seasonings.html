@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sofire - Seasonings</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 公共顶部导航（同首页） -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container">
+            <!-- 网站Logo -->
+            <a class="navbar-brand fw-bold text-danger" href="#">SOFIRE</a>
+            
+            <!-- 导航右侧链接 -->
+            <div class="d-flex align-items-center">
+                <div class="navbar-nav flex-row">
+                    <a class="nav-link px-3" href="#">Login</a>
+                    <a class="nav-link px-3" href="#">Register</a>
+
+                    <!-- 购物车 -->
+                    <div class="cart-wrapper position-relative">
+                        <a class="nav-link px-3" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                            <span class="badge bg-danger">2</span>
+                        </a>
+                        <!-- 购物车下拉内容 -->
+                        <div class="cart-dropdown">
+                            <div class="cart-header border-bottom p-3">
+                                <h6 class="mb-0">Shop Cart (2 Items)</h6>
+                            </div>
+                            <div class="cart-items">
+                                <!-- 购物车商品 -->
+                                <div class="cart-item d-flex p-3 border-bottom">
+                                    <img src="../images/cookware/1.webp" class="cart-item-img" alt="Product">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-1 fs-7 text-sm">Oreo, Chocolate Sandwich Cookies, Baked, Family Size, 19.1 oz, Shelf Stable, Plastic Tray</h6>
+                                        <div class="quantity-controls d-flex align-items-center mb-2">
+                                            <button class="btn btn-sm btn-outline-secondary">-</button>
+                                            <input type="number" class="form-control form-control-sm mx-2" value="1" min="1" style="width: 50px">
+                                            <button class="btn btn-sm btn-outline-secondary">+</button>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-danger">$9.60</span>
+                                            <button class="btn btn-sm btn-link text-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div class="cart-item d-flex p-3 border-bottom">
+                                    <img src="../images/cookware/0.webp" class="cart-item-img" alt="Product">
+                                    <div class="ms-3 flex-grow-1">
+                                        <h6 class="mb-1 fs-7 text-sm">Younghome 14 Pcs Nonstick Pots and Pans Cookware Set, Kitchen Cooking Sets Easy Clean, Beige Granite</h6>
+                                        <div class="quantity-controls d-flex align-items-center mb-2">
+                                            <button class="btn btn-sm btn-outline-secondary">-</button>
+                                            <input type="number" class="form-control form-control-sm mx-2" value="1" min="1" style="width: 50px">
+                                            <button class="btn btn-sm btn-outline-secondary">+</button>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-danger">$86.99</span>
+                                            <button class="btn btn-sm btn-link text-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cart-footer p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span>Total:</span>
+                                    <span class="text-danger fw-bold">$96.59</span>
+                                </div>
+                                <button class="btn btn-danger w-100">Pay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 分类页面面包屑 -->
+    <nav aria-label="breadcrumb" class="bg-light py-3 border-bottom">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                <li class="breadcrumb-item active">Seasonings</li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- 分类导航（同首页） -->
+    <div class="category-nav py-3 bg-white">
+        <div class="container">
+            <div class="d-flex flex-nowrap overflow-auto">
+                <!-- 分类按钮 -->
+                <a href="food.html" class="btn btn-outline-secondary rounded-pill me-2">Food</a>
+                <a href="cookware.html" class="btn btn-outline-secondary rounded-pill me-2">Cookware</a>
+                <a href="#" class="btn btn-outline-secondary rounded-pill me-2 active">Seasonings</a>
+                <a href="electronics.html" class="btn btn-outline-secondary rounded-pill me-2">Electronics</a>
+                <a href="beauty.html" class="btn btn-outline-secondary rounded-pill me-2">Beauty</a>
+                <a href="daily-goods.html" class="btn btn-outline-secondary rounded-pill me-2">Daily Goods</a>
+                <a href="apparel.html" class="btn btn-outline-secondary rounded-pill me-2">Apparel</a>
+                <a href="bedding.html" class="btn btn-outline-secondary rounded-pill me-2">Bedding</a>
+                <a href="health-care.html" class="btn btn-outline-secondary rounded-pill me-2">Health Care</a>
+                <a href="office.html" class="btn btn-outline-secondary rounded-pill me-2">Office</a>
+                <a href="sports.html" class="btn btn-outline-secondary rounded-pill me-2">Sports</a>
+                <a href="outdoor.html" class="btn btn-outline-secondary rounded-pill me-2">Outdoor</a>
+                <a href="baby-care.html" class="btn btn-outline-secondary rounded-pill me-2">Baby Care</a>
+                <a href="toy.html" class="btn btn-outline-secondary rounded-pill me-2">Toy</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 分类商品展示 -->
+    <main class="container my-5">
+        <h4 class="mb-4">Seasonings Products</h4>
+        <div class="product-grid">
+            <!-- 商品卡片 -->
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-light py-4 mt-5 border-top">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 Sofire China. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
