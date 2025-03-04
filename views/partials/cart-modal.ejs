@@ -1,0 +1,59 @@
+<!-- views/partials/cart-modal.ejs -->
+<div class="cart-wrapper position-relative">
+    <!-- 修改打开购物车的按钮 -->
+    <button class="cart-toggle nav-link px-3">
+      <svg>...</svg>
+      <% if (cartItemCount > 0) { %>
+        <span class="badge bg-danger"><%= cartItemCount %></span>
+      <% } %>
+    </button>
+  
+    <!-- 购物车下拉内容 -->
+    <div class="cart-dropdown">
+      <div class="cart-header border-bottom p-3">
+        <h6 class="mb-0">
+          Shop Cart (<%= cartItemCount %> <%= cartItemCount === 1 ? 'Item' : 'Items' %>)
+        </h6>
+        <button class="cart-close btn-close"></button>
+      </div>
+  
+      <!-- 动态商品列表 -->
+      <div class="cart-items">
+        <% if (cartItems && cartItems.length) { %>
+          <% cartItems.forEach(item => { %>
+            <div class="cart-item">
+              <!-- 添加数据属性 -->
+              <button 
+                data-action="update-quantity" 
+                data-pid="<%= item.pid %>" 
+                data-delta="-1"
+              >-</button>
+              
+              <input 
+                data-action="update-quantity" 
+                data-pid="<%= item.pid %>"
+                value="<%= item.quantity %>"
+              >
+  
+              <button 
+                data-action="update-quantity" 
+                data-pid="<%= item.pid %>" 
+                data-delta="1"
+              >+</button>
+  
+              <button 
+                data-action="remove-item" 
+                data-pid="<%= item.pid %>"
+              >Delete</button>
+            </div>
+          <% }); %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 引入模块化脚本 -->
+  <script type="module">
+    import { CartManager } from '/js/cart.js';
+    window.CartManager = CartManager;
+  </script>

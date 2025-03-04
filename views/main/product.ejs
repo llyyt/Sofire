@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <%- include('../partials/head') %>
+  <title><%= product.name %> - Sofire</title>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <!-- 动态面包屑导航 -->
+  <nav aria-label="breadcrumb" class="bg-light py-3 border-bottom">
+    <div class="container">
+      <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">首页</a></li>
+        <li class="breadcrumb-item"><a href="/category/<%= product.catid %>">
+          <%= product.category_name %>
+        </a></li>
+        <li class="breadcrumb-item active"><%= product.name %></li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- 商品详情 -->
+  <main class="container my-5">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <img src="/uploads/original/<%= product.image %>" 
+             class="img-fluid" 
+             alt="<%= product.name %>">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="mb-3"><%= product.name %></h1>
+        <div class="d-flex align-items-center mb-4">
+          <h2 class="text-danger me-3">¥<%= product.price.toFixed(2) %></h2>
+        </div>
+        <div class="mb-4">
+          <%= product.description %>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
