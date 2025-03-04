@@ -1,59 +1,24 @@
-<!-- views/partials/cart-modal.ejs -->
 <div class="cart-wrapper position-relative">
-    <!-- 修改打开购物车的按钮 -->
-    <button class="cart-toggle nav-link px-3">
-      <svg>...</svg>
-      <% if (cartItemCount > 0) { %>
-        <span class="badge bg-danger"><%= cartItemCount %></span>
-      <% } %>
-    </button>
+  <a class="nav-link px-3" href="#">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+      <!-- 购物车图标代码 -->
+    </svg>
+    <span class="badge bg-danger cart-counter">0</span>
+  </a>
   
-    <!-- 购物车下拉内容 -->
-    <div class="cart-dropdown">
-      <div class="cart-header border-bottom p-3">
-        <h6 class="mb-0">
-          Shop Cart (<%= cartItemCount %> <%= cartItemCount === 1 ? 'Item' : 'Items' %>)
-        </h6>
-        <button class="cart-close btn-close"></button>
+  <div class="cart-dropdown">
+    <div class="cart-header border-bottom p-3">
+      <h6 class="mb-0">购物车 (<span class="cart-count">0</span> 件商品)</h6>
+    </div>
+    <div class="cart-items">
+      <!-- 动态内容由JavaScript填充 -->
+    </div>
+    <div class="cart-footer p-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <span>总计：</span>
+        <span class="text-danger fw-bold cart-total">$0.00</span>
       </div>
-  
-      <!-- 动态商品列表 -->
-      <div class="cart-items">
-        <% if (cartItems && cartItems.length) { %>
-          <% cartItems.forEach(item => { %>
-            <div class="cart-item">
-              <!-- 添加数据属性 -->
-              <button 
-                data-action="update-quantity" 
-                data-pid="<%= item.pid %>" 
-                data-delta="-1"
-              >-</button>
-              
-              <input 
-                data-action="update-quantity" 
-                data-pid="<%= item.pid %>"
-                value="<%= item.quantity %>"
-              >
-  
-              <button 
-                data-action="update-quantity" 
-                data-pid="<%= item.pid %>" 
-                data-delta="1"
-              >+</button>
-  
-              <button 
-                data-action="remove-item" 
-                data-pid="<%= item.pid %>"
-              >Delete</button>
-            </div>
-          <% }); %>
-        <% } %>
-      </div>
+      <button class="btn btn-danger w-100">去结算</button>
     </div>
   </div>
-  
-  <!-- 引入模块化脚本 -->
-  <script type="module">
-    import { CartManager } from '/js/cart.js';
-    window.CartManager = CartManager;
-  </script>
+</div>

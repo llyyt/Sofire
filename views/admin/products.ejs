@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>产品管理</title>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/admin-header') %>
+
+  <div class="container mt-5" class="mb-5">
+    <!-- 产品表单 -->
+    <form action="/admin/products" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label class="form-label">分类选择</label>
+        <select class="form-select" name="catid" required>
+          <% categories.forEach(cat => { %>
+            <option value="<%= cat.catid %>"><%= cat.name %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">产品名称</label>
+        <input type="text" class="form-control" name="name" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">价格</label>
+        <input type="number" step="0.01" class="form-control" name="price" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">描述</label>
+        <textarea class="form-control" name="description" rows="3"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">产品图片</label>
+        <input type="file" class="form-control" name="image" accept="image/*">
+      </div>
+
+      <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+
+
+    <!-- 分类管理区块 -->
+    <div class="card mb-5 mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+        <h5>分类管理</h5>
+        <button class="btn btn-sm btn-primary" 
+                data-bs-toggle="modal" 
+                data-bs-target="#categoryModal">
+            添加分类
+        </button>
+        </div>
+        <div class="card-body">
+        <!-- 分类列表 -->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>分类名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% categories.forEach(cat => { %>
+                <tr>
+                <td>
+                    <span class="category-name"><%= cat.name %></span>
+                    <input type="text" 
+                        class="form-control edit-input d-none" 
+                        value="<%= cat.name %>">
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-warning edit-category" data-catid="<%= cat.catid %>">编辑</button>
+                     <button class="btn btn-sm btn-danger delete-category" 
+                            data-catid="<%= cat.catid %>">删除</button>
+                    <!-- <form action="/admin/categories/delete/<%= cat.catid %>" 
+                        method="POST" 
+                        class="d-inline"
+                        onsubmit="return confirm('确定删除该分类吗？')">
+                    <button type="submit" class="btn btn-sm btn-danger">删除</button> -->
+                  </form>
+                </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <!-- 添加分类模态框 -->
+    <div class="modal fade" id="categoryModal" tabindex="-1">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="/admin/categories" method="POST">
+            <div class="modal-header">
+                <h5 class="modal-title">添加分类</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                <label class="form-label">分类名称</label>
+                <input type="text" class="form-control" name="name" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+
+    <!-- 产品列表 -->
+    <div class="mt-5">
+      <h4>现有产品</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>名称</th>
+            <th>价格</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(product => { %>
+            <tr>
+              <td><%= product.pid %></td>
+              <td><%= product.name %></td>
+              <td>¥<%= product.price.toFixed(2) %></td>
+              <td>
+                <a href="/admin/products/edit/<%= product.pid %>" class="btn btn-sm btn-warning">编辑</a>
+                <form action="/admin/products/delete/<%= product.pid %>" method="POST" class="d-inline">
+                  <button type="submit" class="btn btn-sm btn-danger">删除</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/admin.js"></script>
+
+</body>
+</html>

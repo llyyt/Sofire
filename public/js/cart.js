@@ -1,64 +1,58 @@
 // public/js/cart.js
-export class CartManager {
-    static init() {
-      document.addEventListener('click', this.handleCartActions.bind(this));
-    }
-  
-    static handleCartActions(event) {
-      const target = event.target;
-      
-      // 打开购物车
-      if (target.closest('.cart-toggle')) {
-        this.toggleCart(true);
-      }
-  
-      // 关闭购物车
-      if (target.closest('.cart-close')) {
-        this.toggleCart(false);
-      }
-  
-      // 数量操作
-      if (target.closest('[data-action="update-quantity"]')) {
-        const button = target.closest('[data-action="update-quantity"]');
-        const pid = button.dataset.pid;
-        const delta = parseInt(button.dataset.delta);
-        this.updateQuantity(pid, delta);
-      }
-  
-      // 删除商品
-      if (target.closest('[data-action="remove-item"]')) {
-        const button = target.closest('[data-action="remove-item"]');
-        const pid = button.dataset.pid;
-        this.removeItem(pid);
-      }
-    }
-  
-    static toggleCart(show) {
-      document.querySelector('.cart-dropdown').classList.toggle('show', show);
-    }
-  
-    static async updateQuantity(pid, delta) {
-      try {
-        const response = await fetch(`/cart/${pid}?delta=${delta}`, {
-          method: 'PATCH'
-        });
-        if (response.ok) location.reload();
-      } catch (error) {
-        console.error('Error updating quantity:', error);
-      }
-    }
-  
-    static async removeItem(pid) {
-      try {
-        const response = await fetch(`/cart/${pid}`, {
-          method: 'DELETE'
-        });
-        if (response.ok) location.reload();
-      } catch (error) {
-        console.error('Error removing item:', error);
-      }
+class CartUI {
+  constructor() {
+    this.dom = {
+      counter: document.querySelector('.cart-counter'),
+      dropdown: document.querySelector('.cart-dropdown'),
+      itemsContainer: document.querySelector('.cart-items'),
+      totalEl: document.querySelector('.cart-total'),
+      countEl: document.querySelector('.cart-count')
     }
   }
-  
-  // 初始化购物车功能
-  document.addEventListener('DOMContentLoaded', () => CartManager.init());
+
+  update(cart) {
+    // 更新数量显示
+    this.dom.counter.textContent = cart.items.size
+    this.dom.countEl.textContent = cart.items.size
+
+    // 清空现有内容
+    this.dom.itemsContainer.innerHTML = ''
+
+    // 动态生成商品项
+    cart.items.forEach(item => {
+      const itemEl = document.createElement('div')
+      itemEl.className = 'cart-item d-flex p-3 border-bottom'
+      itemEl.innerHTML = this._createItemHTML(item)
+      this.dom.itemsContainer.appendChild(itemEl)
+    })
+
+    // 更新总金额
+    this.dom.totalEl.textContent = `$${cart.total.toFixed(2)}`
+  }
+
+  _createItemHTML(item) {
+    return `
+      <div class="flex-shrink-0">
+        <img src="/uploads/thumbnails/${item.image}" 
+             class="cart-item-img" 
+             alt="${item.name}"
+             onerror="this.src='/images/placeholder.png'">
+      </div>
+      <div class="ms-3 flex-grow-1">
+        <h6 class="mb-1 fs-7 text-sm">${item.name}</h6>
+        <div class="quantity-controls d-flex align-items-center mb-2">
+          <button class="btn btn-sm btn-outline-secondary decrement">-</button>
+          <input type="number" 
+                class="form-control form-control-sm mx-2 quantity-input" 
+                value="${item.quantity}" 
+                min="1">
+          <button class="btn btn-sm btn-outline-secondary increment">+</button>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="text-danger">$${item.total.toFixed(2)}</span>
+          <button class="btn btn-sm btn-link text-danger delete">删除</button>
+        </div>
+      </div>
+    `
+  }
+}
