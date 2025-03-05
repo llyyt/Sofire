@@ -64,4 +64,23 @@ router.get('/product/:pid', async (req, res, next) => {
   }
 });
 
+
+// 获取商品信息接口
+router.get('/api/products/:pid', async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT pid, name, price, image FROM products WHERE pid = ?',
+      [req.params.pid]
+    )
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ error: '商品不存在' })
+    }
+    
+    res.json(rows[0])
+  } catch (err) {
+    res.status(500).json({ error: '服务器错误' })
+  }
+})
+
 module.exports = router;
