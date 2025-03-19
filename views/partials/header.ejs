@@ -1,0 +1,19 @@
+<!-- 顶部导航 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-danger" href="/">SOFIRE</a>
+      
+      <!-- 动态登录状态 -->
+      <% if (typeof user !== "undefined" && user) { %>
+        <span class="me-3"><%=用户头像%></span>
+      <% } else { %>
+        <div class="navbar-nav flex-row">
+          <a class="nav-link px-3" href="/login">登录</a>
+          <a class="nav-link px-3" href="/register">注册</a>
+        </div>
+      <% } %>
+  
+      <!-- 购物车组件 -->
+      <%- include('cart-modal') %>
+    </div>
+  </nav>
