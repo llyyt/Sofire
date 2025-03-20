@@ -4,6 +4,7 @@ const pool = require('../models/db')
 const multer = require('multer')
 const sharp = require('sharp')
 const path = require('path')
+const fs = require('fs')
 
 // 文件上传配置
 const storage = multer.diskStorage({

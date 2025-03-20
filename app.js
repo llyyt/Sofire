@@ -2,52 +2,85 @@ require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
+const helmet = require('helmet');
+const crypto = require('crypto');
+const { JSDOM } = require('jsdom');
+const createDOMPurify = require('dompurify');
 const app = express();
+
+// 初始化DOM净化
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window);
 
 // 数据库连接
 require('./models/db');
 
-// 模板引擎设置
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// CSP配置中间件
+app.use((req, res, next) => {
+  const nonce = crypto.randomBytes(16).toString('base64');
+  res.locals.cspNonce = nonce;
+  
+  const cspHeader = `
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net 'nonce-${nonce}';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: /uploads/;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+  `.replace(/\n/g, "");
+  
+  res.setHeader('Content-Security-Policy', cspHeader);
+  next();
+});
 
-// // 配置 session 中间件
-// app.use(session({
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: false }
-// }));
+// 安全头设置
+app.use(helmet({
+  contentSecurityPolicy: false, // 已手动设置
+  hsts: { maxAge: 31536000, includeSubDomains: true },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+  xssFilter: true,
+  noSniff: true,
+  hidePoweredBy: true
+}));
 
-// app.use((req, res, next) => {
-//   // 从 session 或数据库获取购物车数据（示例数据）
-//   const cartItems = req.session.cart || [
-//     { pid: "P001", name: "测试商品", price: 99.99, quantity: 2 }
-//   ];
-
-//   // 注入模板变量
-//   res.locals.cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-//   res.locals.cartItems = cartItems;
-//   res.locals.totalPrice = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-//   next();
-// });
-
-// // 添加在购物车中间件之后测试购物车数据
-// app.use((req, res, next) => {
-//   console.log('当前购物车数据：', {
-//     cartItemCount: res.locals.cartItemCount,
-//     cartItems: res.locals.cartItems,
-//     totalPrice: res.locals.totalPrice
-//   });
-//   next();
-// });
+// 会话配置
+app.use(session({
+  secret: process.env.SESSION_SECRET || crypto.randomBytes(64).toString('hex'),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
 
 // 中间件
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+app.use(csrf({ cookie: true }));
+
+
+// CSRF令牌中间件
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
+
+// 模板引擎设置
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // 路由
 app.use('/', require('./routes/main'));
