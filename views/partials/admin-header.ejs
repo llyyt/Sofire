@@ -1,9 +1,15 @@
-<!-- 顶部导航 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-danger" href="/">SOFIRE</a>
+  <div class="container">
+      <a class="navbar-brand fw-bold text-danger" href="/">ADMIN PANEL</a>
       
-      <a class="nav-link px-3">ADMIN PANNEL</a>
-
-    </div>
-  </nav>
+      <div class="d-flex align-items-center">
+          <% if (user && user.email !== 'Guest') { %>
+              <span class="me-3"><%= user.email %></span>
+              <form action="/auth/logout" method="POST">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <button type="submit" class="btn btn-outline-danger btn-sm">注销</button>
+              </form>
+          <% } %>
+      </div>
+  </div>
+</nav>

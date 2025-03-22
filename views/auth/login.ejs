@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/head') %>
+    <title>管理员登录</title>
+</head>
+<body>
+    <div class="container mt-5" style="max-width: 400px;">
+        <h2 class="mb-4">管理员登录</h2>
+        
+        <% if (error_msg) { %>
+             <div class="alert alert-danger"><%= error_msg %></div>
+        <% } %>
+
+        <form action="/auth/login" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            
+            <div class="mb-3">
+                <label class="form-label">邮箱</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">密码</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">登录</button>
+        </form>
+    </div>
+</body>
+</html>
+
