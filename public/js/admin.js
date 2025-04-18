@@ -21,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
               },
+              credentials: 'same-origin',
               body: JSON.stringify({ name: newName })
             })
             .then(response => {
@@ -59,7 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
           
           if (confirm('确定要删除此分类吗？')) {
             fetch(`/admin/categories/delete/${catid}`, {
-              method: 'POST'
+              method: 'POST',
+              headers: {
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+              }
             })
             .then(response => {
               if (response.ok) {

@@ -1,88 +1,27 @@
-// // public/js/cart.js
-// class CartUI {
-//   constructor() {
-//     this.dom = {
-//       counter: document.querySelector('.cart-counter'),
-//       dropdown: document.querySelector('.cart-dropdown'),
-//       itemsContainer: document.querySelector('.cart-items'),
-//       totalEl: document.querySelector('.cart-total'),
-//       countEl: document.querySelector('.cart-count')
-//     }
-//   }
-
-//   update(cart) {
-//     // 更新数量显示
-//     this.dom.counter.textContent = cart.items.size
-//     this.dom.countEl.textContent = cart.items.size
-
-//     // 清空现有内容
-//     this.dom.itemsContainer.innerHTML = ''
-
-//     // 动态生成商品项
-//     cart.items.forEach(item => {
-//       const itemEl = document.createElement('div')
-//       itemEl.className = 'cart-item d-flex p-3 border-bottom'
-//       itemEl.innerHTML = this._createItemHTML(item)
-//       this.dom.itemsContainer.appendChild(itemEl)
-//     })
-
-//     // 更新总金额
-//     this.dom.totalEl.textContent = `$${cart.total.toFixed(2)}`
-//   }
-
-//   _createItemHTML(item) {
-//     return `
-//       <div class="flex-shrink-0">
-//         <img src="/uploads/thumbnails/${item.image}" 
-//              class="cart-item-img" 
-//              alt="${item.name}"
-//              onerror="this.src='/images/placeholder.png'">
-//       </div>
-//       <div class="ms-3 flex-grow-1">
-//         <h6 class="mb-1 fs-7 text-sm">${item.name}</h6>
-//         <div class="quantity-controls d-flex align-items-center mb-2">
-//           <button class="btn btn-sm btn-outline-secondary decrement">-</button>
-//           <input type="number" 
-//                 class="form-control form-control-sm mx-2 quantity-input" 
-//                 value="${item.quantity}" 
-//                 min="1">
-//           <button class="btn btn-sm btn-outline-secondary increment">+</button>
-//         </div>
-//         <div class="d-flex justify-content-between">
-//           <span class="text-danger">$${item.total.toFixed(2)}</span>
-//           <button class="btn btn-sm btn-link text-danger delete">删除</button>
-//         </div>
-//       </div>
-//     `
-//   }
-// }
-
-
 class CartItem {
   constructor(pid, name, price, image, quantity = 1) {
-    this.pid = pid
-    this.name = name
-    this.price = price
-    this.image = image
-    this.quantity = quantity
+    this.pid = pid;
+    this.name = name;
+    this.price = price;
+    this.image = image;
+    this.quantity = quantity;
   }
 
   get total() {
-    return this.price * this.quantity
+    return this.price * this.quantity;
   }
 }
 
 class ShoppingCart {
   constructor() {
-    this.items = new Map()
-    this.loadFromStorage()
-    this.initEventListeners()
-    this.updateCartUI()
+    this.items = new Map();
+    this.loadFromStorage();
+    this.initEventListeners();
+    this.updateCartUI();
   }
 
-  // 从localStorage加载数据
   loadFromStorage() {
-    const saved = localStorage.getItem('cart')
+    const saved = localStorage.getItem('cart');
     if (saved) {
       JSON.parse(saved).forEach(item => {
         this.items.set(item.pid, new CartItem(
@@ -91,12 +30,11 @@ class ShoppingCart {
           item.price,
           item.image,
           item.quantity
-        ))
-      })
+        ));
+      });
     }
   }
 
-  // 保存到localStorage
   saveToStorage() {
     const data = Array.from(this.items.values()).map(item => ({
       pid: item.pid,
@@ -104,132 +42,138 @@ class ShoppingCart {
       price: item.price,
       image: item.image,
       quantity: item.quantity
-    }))
-    localStorage.setItem('cart', JSON.stringify(data))
+    }));
+    localStorage.setItem('cart', JSON.stringify(data));
   }
 
-  // 事件监听初始化
   initEventListeners() {
-    // 加入购物车按钮
     document.body.addEventListener('click', e => {
-      if (e.target.closest('.add-to-cart')) {
-        const pid = e.target.closest('.add-to-cart').dataset.pid
-        this.addItem(pid)
+      const addButton = e.target.closest('.add-to-cart');
+      if (addButton) {
+        const pid = addButton.dataset.pid;
+        this.addItem(pid);
       }
-    })
+    });
 
-    // 购物车内部操作
     document.querySelector('.cart-dropdown').addEventListener('click', e => {
-      const itemEl = e.target.closest('.cart-item')
-      if (!itemEl) return
+      const itemEl = e.target.closest('.cart-item');
+      if (!itemEl) return;
       
-      const pid = itemEl.dataset.pid
-      if (e.target.closest('.decrement')) this.updateQuantity(pid, -1)
-      if (e.target.closest('.increment')) this.updateQuantity(pid, 1)
-      if (e.target.closest('.delete-item')) this.removeItem(pid)
-    })
+      const pid = itemEl.dataset.pid;
+      if (e.target.closest('.decrement')) this.updateQuantity(pid, -1);
+      if (e.target.closest('.increment')) this.updateQuantity(pid, 1);
+      if (e.target.closest('.delete-item')) this.removeItem(pid);
+    });
   }
 
-  // 添加商品
   async addItem(pid) {
     try {
-      // 获取商品详情
-      const product = await this.fetchProductInfo(pid)
+      const response = await fetch(`/api/products/${pid}`, {
+        headers: {
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        }
+      });
+      
+      if (!response.ok) throw new Error('商品不存在');
+      const product = await response.json();
 
       if (this.items.has(pid)) {
-        this.items.get(pid).quantity++
+        this.items.get(pid).quantity++;
       } else {
         this.items.set(pid, new CartItem(
           pid,
           product.name,
           product.price,
           product.image
-        ))
+        ));
       }
       
-      this.updateCartUI()
-      this.saveToStorage()
+      this.updateCartUI();
+      this.saveToStorage();
     } catch (err) {
-      console.error('添加商品失败:', err)
-      alert('无法获取商品信息')
+      console.error('添加商品失败:', err);
+      alert('操作失败，请刷新页面后重试');
     }
   }
 
-  // 获取商品信息
-  async fetchProductInfo(pid) {
-    const response = await fetch(`/api/products/${pid}`)
-    if (!response.ok) throw new Error('商品不存在')
-    return await response.json()
-  }
-
-  // 更新数量
   updateQuantity(pid, delta) {
-    const item = this.items.get(pid)
-    item.quantity = Math.max(1, item.quantity + delta)
-    this.updateCartUI()
-    this.saveToStorage()
+    const item = this.items.get(pid);
+    if (!item) return;
+    
+    item.quantity = Math.max(1, item.quantity + delta);
+    this.updateCartUI();
+    this.saveToStorage();
   }
 
-  // 删除商品
   removeItem(pid) {
-    this.items.delete(pid)
-    this.updateCartUI()
-    this.saveToStorage()
+    this.items.delete(pid);
+    this.updateCartUI();
+    this.saveToStorage();
   }
 
-  // 更新购物车UI
+  createSafeElement(tag, className, text) {
+    const el = document.createElement(tag);
+    el.className = className;
+    if (text) el.textContent = text;
+    return el;
+  }
+
   updateCartUI() {
-    const container = document.querySelector('.cart-items')
-    const totalEl = document.querySelector('.cart-total')
-    const badge = document.querySelector('.cart-badge')
-    const countEl = document.querySelector('.cart-count')
+    const container = document.querySelector('.cart-items');
+    const totalEl = document.querySelector('.cart-total');
+    const badge = document.querySelector('.cart-badge');
+    const countEl = document.querySelector('.cart-count');
 
-    // 清空现有内容
-    container.innerHTML = ''
+    container.innerHTML = '';
+    let total = 0;
 
-    // 生成新内容
-    let total = 0
     this.items.forEach(item => {
-      console.log('Current item:', {
-        pid: item.pid,
-        name: item.name,
-        image: item.image // 验证值
-      })
-      const itemHTML = `
-        <div class="cart-item d-flex p-3 border-bottom" data-pid="${item.pid}">
-          <img src="/uploads/thumbnails/${item.image}" 
-               class="cart-item-img" 
-               alt="${item.name}"
-               onerror="this.src='/images/placeholder.png'">
-          <div class="ms-3 flex-grow-1">
-            <h6 class="mb-1 fs-7 text-sm">${item.name}</h6>
-            <div class="quantity-controls d-flex align-items-center mb-2">
-              <button class="btn btn-sm btn-outline-secondary decrement">-</button>
-              <input type="number" 
-                    class="form-control form-control-sm mx-2 quantity" 
-                    value="${item.quantity}" 
-                    min="1">
-              <button class="btn btn-sm btn-outline-secondary increment">+</button>
-            </div>
-            <div class="d-flex justify-content-between">
-              <span class="text-danger">$${item.total.toFixed(2)}</span>
-              <button class="btn btn-sm btn-link text-danger delete-item">删除</button>
-            </div>
-          </div>
-        </div>
-      `
-      container.insertAdjacentHTML('beforeend', itemHTML)
-      total += item.total
-    })
+      const itemEl = this.createSafeElement('div', 'cart-item d-flex p-3 border-bottom');
+      itemEl.dataset.pid = item.pid;
 
-    // 更新总价和徽章
-    totalEl.textContent = `$${total.toFixed(2)}`
-    badge.textContent = this.items.size
-    countEl.textContent = this.items.size
+      const imgWrapper = this.createSafeElement('div', 'flex-shrink-0');
+      const img = this.createSafeElement('img', 'cart-item-img');
+      img.src = `/uploads/thumbnails/${item.image}`;
+      img.alt = item.name;
+      img.onerror = () => img.src = '/images/placeholder.png';
+      imgWrapper.appendChild(img);
+
+      const contentWrapper = this.createSafeElement('div', 'ms-3 flex-grow-1');
+      
+      const nameEl = this.createSafeElement('h6', 'mb-1 fs-7 text-sm', item.name);
+      
+      const quantityControls = this.createSafeElement('div', 'quantity-controls d-flex align-items-center mb-2');
+      const decrementBtn = this.createSafeElement('button', 'btn btn-sm btn-outline-secondary decrement');
+      decrementBtn.textContent = '-';
+      const input = this.createSafeElement('input', 'form-control form-control-sm mx-2 quantity-input');
+      input.type = 'number';
+      input.value = item.quantity;
+      input.min = '1';
+      const incrementBtn = this.createSafeElement('button', 'btn btn-sm btn-outline-secondary increment');
+      incrementBtn.textContent = '+';
+      
+      quantityControls.append(decrementBtn, input, incrementBtn);
+      
+      const priceRow = this.createSafeElement('div', 'd-flex justify-content-between');
+      const priceEl = this.createSafeElement('span', 'text-danger', `$${item.total.toFixed(2)}`);
+      const deleteBtn = this.createSafeElement('button', 'btn btn-sm btn-link text-danger delete-item');
+      deleteBtn.textContent = '删除';
+      
+      priceRow.append(priceEl, deleteBtn);
+      
+      contentWrapper.append(nameEl, quantityControls, priceRow);
+      itemEl.append(imgWrapper, contentWrapper);
+      container.appendChild(itemEl);
+      
+      total += item.total;
+    });
+
+    totalEl.textContent = `$${total.toFixed(2)}`;
+    badge.textContent = this.items.size;
+    countEl.textContent = this.items.size;
   }
 }
 
-// 初始化购物车
 document.addEventListener('DOMContentLoaded', () => {
-  window.cart = new ShoppingCart()
-})
+  window.cart = new ShoppingCart();
+});
